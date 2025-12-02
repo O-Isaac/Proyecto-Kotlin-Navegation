@@ -53,6 +53,7 @@ dependencies {
     implementation (libs.androidx.compose.material.iconsExtended)
     implementation(libs.androidx.lifecycle.viewmode)
     implementation(libs.kotlin.serialization.json)
+    implementation(libs.androidx.appcompat)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

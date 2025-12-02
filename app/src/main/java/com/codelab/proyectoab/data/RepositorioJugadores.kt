@@ -2,9 +2,17 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Shield
 import androidx.compose.material.icons.filled.SportsSoccer
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import com.codelab.proyectoab.R
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+
+
+
 
 // Enum para las posiciones de los jugadores
 enum class Posicion {
@@ -14,6 +22,7 @@ enum class Posicion {
     DELANTERO
 }
 
+// Clase de datos Jugador actualizada con 'imagenId'
 data class Jugador(
     val id: Int,
     val nombre: String,
@@ -28,7 +37,8 @@ data class Jugador(
     val asistencias: Int,
     val partidos: Int,
     val icono: ImageVector,
-    val urlPerfil: String
+    val urlPerfil: String,
+    val imagenId: Int // <-- Nuevo campo para la foto del jugador
 )
 
 object RepositorioJugadores {
@@ -48,7 +58,8 @@ object RepositorioJugadores {
                 asistencias = 0,
                 partidos = 5,
                 icono = Icons.Default.Shield,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/diego-marino"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/diego-marino",
+                imagenId = R.drawable.jugador_1 // <-- Nombre del recurso
             ),
             Jugador(
                 id = 13,
@@ -64,7 +75,8 @@ object RepositorioJugadores {
                 asistencias = 0,
                 partidos = 9,
                 icono = Icons.Default.Shield,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/raul-lizoain"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/raul-lizoain",
+                imagenId = R.drawable.jugador_13
             ),
             Jugador(
                 id = 2,
@@ -80,7 +92,8 @@ object RepositorioJugadores {
                 asistencias = 0,
                 partidos = 7,
                 icono = Icons.Default.Shield,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/lorenzo"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/lorenzo",
+                imagenId = R.drawable.jugador_2
             ),
             Jugador(
                 id = 3,
@@ -96,7 +109,8 @@ object RepositorioJugadores {
                 asistencias = 0,
                 partidos = 10,
                 icono = Icons.Default.Shield,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/jonathan-gomez"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/jonathan-gomez",
+                imagenId = R.drawable.jugador_3
             ),
             Jugador(
                 id = 5,
@@ -112,7 +126,8 @@ object RepositorioJugadores {
                 asistencias = 0,
                 partidos = 10,
                 icono = Icons.Default.Shield,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/javi-moreno"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/javi-moreno",
+                imagenId = R.drawable.jugador_5
             ),
             Jugador(
                 id = 14,
@@ -128,7 +143,8 @@ object RepositorioJugadores {
                 asistencias = 0,
                 partidos = 7,
                 icono = Icons.Default.Shield,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/jon-garcia"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/jon-garcia",
+                imagenId = R.drawable.jugador_14
             ),
             Jugador(
                 id = 15,
@@ -144,7 +160,8 @@ object RepositorioJugadores {
                 asistencias = 0,
                 partidos = 8,
                 icono = Icons.Default.Shield,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/fran-gamez"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/fran-gamez",
+                imagenId = R.drawable.jugador_15
             ),
             Jugador(
                 id = 21,
@@ -160,7 +177,8 @@ object RepositorioJugadores {
                 asistencias = 1,
                 partidos = 10,
                 icono = Icons.Default.Shield,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/carlos-neva-tey"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/carlos-neva-tey",
+                imagenId = R.drawable.jugador_21
             ),
             Jugador(
                 id = 23,
@@ -176,7 +194,8 @@ object RepositorioJugadores {
                 asistencias = 0,
                 partidos = 6,
                 icono = Icons.Default.Shield,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/pepe-sanchez"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/pepe-sanchez",
+                imagenId = R.drawable.jugador_23
             ),
             Jugador(
                 id = 24,
@@ -192,7 +211,8 @@ object RepositorioJugadores {
                 asistencias = 0,
                 partidos = 9,
                 icono = Icons.Default.Shield,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/vallejo"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/vallejo",
+                imagenId = R.drawable.jugador_24
             ),
             Jugador(
                 id = 4,
@@ -208,7 +228,8 @@ object RepositorioJugadores {
                 asistencias = 0,
                 partidos = 9,
                 icono = Icons.Default.SportsSoccer,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/agus-medina"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/agus-medina",
+                imagenId = R.drawable.jugador_4
             ),
             Jugador(
                 id = 6,
@@ -224,7 +245,8 @@ object RepositorioJugadores {
                 asistencias = 0,
                 partidos = 8,
                 icono = Icons.Default.SportsSoccer,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/pacheco"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/pacheco",
+                imagenId = R.drawable.jugador_6
             ),
             Jugador(
                 id = 8,
@@ -240,7 +262,8 @@ object RepositorioJugadores {
                 asistencias = 3,
                 partidos = 10,
                 icono = Icons.Default.SportsSoccer,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/riki"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/riki",
+                imagenId = R.drawable.jugador_8
             ),
             Jugador(
                 id = 17,
@@ -256,7 +279,8 @@ object RepositorioJugadores {
                 asistencias = 1,
                 partidos = 5,
                 icono = Icons.Default.SportsSoccer,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/ale-melendez"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/ale-melendez",
+                imagenId = R.drawable.jugador_17
             ),
             Jugador(
                 id = 18,
@@ -272,7 +296,8 @@ object RepositorioJugadores {
                 asistencias = 0,
                 partidos = 7,
                 icono = Icons.Default.SportsSoccer,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/javi-villar"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/javi-villar",
+                imagenId = R.drawable.jugador_18
             ),
             Jugador(
                 id = 7,
@@ -288,7 +313,8 @@ object RepositorioJugadores {
                 asistencias = 2,
                 partidos = 10,
                 icono = Icons.Default.SportsSoccer,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/puertas"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/puertas",
+                imagenId = R.drawable.jugador_7
             ),
             Jugador(
                 id = 9,
@@ -304,7 +330,8 @@ object RepositorioJugadores {
                 asistencias = 1,
                 partidos = 8,
                 icono = Icons.Default.SportsSoccer,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/higinio"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/higinio",
+                imagenId = R.drawable.jugador_9
             ),
             Jugador(
                 id = 10,
@@ -320,7 +347,8 @@ object RepositorioJugadores {
                 asistencias = 2,
                 partidos = 6,
                 icono = Icons.Default.SportsSoccer,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/jefte"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/jefte",
+                imagenId = R.drawable.jugador_10
             ),
             Jugador(
                 id = 11,
@@ -336,7 +364,8 @@ object RepositorioJugadores {
                 asistencias = 0,
                 partidos = 3,
                 icono = Icons.Default.SportsSoccer,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/valverde"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/valverde",
+                imagenId = R.drawable.jugador_11
             ),
             Jugador(
                 id = 16,
@@ -352,7 +381,8 @@ object RepositorioJugadores {
                 asistencias = 1,
                 partidos = 9,
                 icono = Icons.Default.SportsSoccer,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/lazo"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/lazo",
+                imagenId = R.drawable.jugador_16
             ),
             Jugador(
                 id = 19,
@@ -368,7 +398,8 @@ object RepositorioJugadores {
                 asistencias = 2,
                 partidos = 10,
                 icono = Icons.Default.SportsSoccer,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/escriche"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/escriche",
+                imagenId = R.drawable.jugador_19
             ),
             Jugador(
                 id = 22,
@@ -384,9 +415,15 @@ object RepositorioJugadores {
                 asistencias = 0,
                 partidos = 4,
                 icono = Icons.Default.SportsSoccer,
-                urlPerfil = "https://www.albacetebalompie.es/jugadores/morcillo"
+                urlPerfil = "https://www.albacetebalompie.es/jugadores/morcillo",
+                imagenId = R.drawable.jugador_22
             )
         )
+    }
+
+    // Nueva función para buscar un jugador por su ID
+    fun getJugadorPorId(id: Int): Jugador? {
+        return getJugadores().find { it.id == id }
     }
 }
 
