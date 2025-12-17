@@ -4,6 +4,7 @@ import RepositorioJugadores
 import android.content.SharedPreferences
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavType
@@ -19,8 +20,21 @@ import com.codelab.proyectoab.ui.screens.PlantillaScreen
 
 
 @Composable
-fun AppNavigation(prefs: SharedPreferences){
+fun AppNavigation(
+    prefs: SharedPreferences,
+    initialJugadorId: Int
+){
     val navController = rememberNavController()
+
+    LaunchedEffect(initialJugadorId) {
+        if (initialJugadorId != -1) {
+            navController.navigate("detalle_jugador/$initialJugadorId") {
+                // Opcional: evitar volver atrás a "inicio"
+                launchSingleTop = true
+                restoreState = true
+            }
+        }
+    }
 
     NavHost(navController = navController, startDestination = "inicio"){
         composable("inicio") {

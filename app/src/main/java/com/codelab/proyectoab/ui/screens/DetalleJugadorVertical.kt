@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import com.codelab.proyectoab.ui.components.BotonNotificacion
 import com.codelab.proyectoab.ui.components.DatosPersonales
 import com.codelab.proyectoab.ui.components.FotoYEstadisticas
 
@@ -38,18 +40,15 @@ fun DetalleJugadorVertical(jugador: Jugador) {
             modifier = Modifier.zIndex(-1f)
         )
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.padding(32.dp)
         ) {
             FotoYEstadisticas(jugador)
             Spacer(Modifier.height(80.dp))
             DatosPersonales(jugador)
+            Spacer(Modifier.height(80.dp))
+            BotonNotificacion(jugador)
         }
     }
 }
 
-@Composable
-@Preview
-fun DetalleJugadorVerticalPreview(modifier: Modifier = Modifier) {
-    val jugador = RepositorioJugadores.getJugadores().get(0)
-    DetalleJugadorVertical(jugador)
-}

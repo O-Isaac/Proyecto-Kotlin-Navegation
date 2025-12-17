@@ -1,7 +1,9 @@
 package com.codelab.proyectoab.ui.screens
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +18,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -31,7 +34,9 @@ import androidx.navigation.NavController
 import com.codelab.proyectoab.MainActivity.Companion.CLAVE_TEMA_OSCURO
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.LocalContext
 import com.codelab.proyectoab.ui.components.GuardarNombreComponent
+import com.codelab.proyectoab.utils.PermissionHelper
 
 @SuppressLint("UseKtx")
 @Composable
@@ -43,6 +48,10 @@ fun InicioScreen(modifier: Modifier = Modifier, prefs: SharedPreferences, navCon
     val estadio = stringResource(R.string.nombre_estadio)
     val btnPlantilla = stringResource(R.string.boton_ver_plantilla)
     val temaOscuro = prefs.getBoolean(CLAVE_TEMA_OSCURO, false)
+    val context = LocalContext.current
+    val mainActivity = context as MainActivity
+    val permissionStore = mainActivity.permissionStore
+
 
     Surface {
         Column(
