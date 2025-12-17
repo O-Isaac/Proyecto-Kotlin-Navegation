@@ -14,6 +14,7 @@ class MainActivity : ComponentActivity() {
     companion object {
         const val CLAVE_TEMA_OSCURO = "dark_theme"
         const val CLAVE_NOMBRE_USUARIO = "nombre_usuario"
+        const val CLAVE_JUGADORES_EXPANDIDOS = "jugadores_expandidos"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

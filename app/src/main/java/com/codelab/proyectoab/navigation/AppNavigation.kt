@@ -30,7 +30,7 @@ fun AppNavigation(prefs: SharedPreferences){
         }
 
         composable("plantilla") {
-            PlantillaScreen() { urlPerfil ->
+            PlantillaScreen(prefs = prefs) { urlPerfil ->
                 navController.navigate(urlPerfil)
             }
         }

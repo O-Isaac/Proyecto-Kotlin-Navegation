@@ -31,11 +31,14 @@ import androidx.compose.ui.unit.dp
 import toLocalizedString
 
 @Composable
-fun ExtensibleCard(modifier: Modifier = Modifier, jugador: Jugador, onClickPerfil: (String) -> Unit) {
-    var isExpanded by remember { mutableStateOf(false) }
-
+fun ExtensibleCard(
+    jugador: Jugador,
+    isExpanded: Boolean,
+    onExpandedChange: () -> Unit,
+    onClickPerfil: (String) -> Unit
+) {
     Card(
-        onClick = { isExpanded = !isExpanded },
+        onClick = { onExpandedChange() },
         shape = MaterialTheme.shapes.medium,
         modifier = Modifier
             .fillMaxWidth()
@@ -92,14 +95,5 @@ fun ExtensibleCard(modifier: Modifier = Modifier, jugador: Jugador, onClickPerfi
                 }
             }
         }
-    }
-}
-
-@Composable
-@Preview(showBackground = true)
-fun ExtensibleCardPreview() {
-    val jugador: Jugador = RepositorioJugadores.getJugadores().get(0)
-    ExtensibleCard(jugador = jugador) {
-        println(jugador.urlPerfil)
     }
 }

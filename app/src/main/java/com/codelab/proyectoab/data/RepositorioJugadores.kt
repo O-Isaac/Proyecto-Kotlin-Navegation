@@ -22,6 +22,12 @@ enum class Posicion {
     DELANTERO
 }
 
+// Clase para controlar jugadores expandidos
+data class JugadorUI(
+    val jugador: Jugador,
+    val isExpanded: MutableState<Boolean>
+)
+
 // Clase de datos Jugador actualizada con 'imagenId'
 data class Jugador(
     val id: Int,
